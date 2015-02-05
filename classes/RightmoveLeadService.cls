@@ -1,8 +1,6 @@
-/* Author: Matt Parker
- * Company: Cloudreach Ltd
- * Date: 1st July 2014
- * Business case: Integration with Rightmove API for inbound email leads
- */
+/* 
+*Author: Matt Parker
+*/
 @RestResource(urlMapping='/Lead/*')
 global class RightmoveLeadService {
 
