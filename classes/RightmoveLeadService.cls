@@ -19,10 +19,10 @@ global class RightmoveLeadService {
         */
         RightmoveRequest request = new RightmoveRequest();
         RightmoveRequest.Network network = new RightmoveRequest.Network();
-        network.network_id = 7552;
+        network.network_id = xxxx;
 
         RightmoveRequest.Brand brand = new RightmoveRequest.Brand();
-        brand.brand_id = 27286;
+        brand.brand_id = xxxxx;
 
         RightmoveRequest.Export_period export_period = new RightmoveRequest.Export_period();
         Date today = Date.today();
