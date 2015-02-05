@@ -10,7 +10,7 @@ global class RightmoveLeadService {
     public RightmoveLeadService() {}
 
     @future(callout=true)
-	global static void getRightMoveLeads(){
+    global static void getRightMoveLeads(){
 
 	String result = '';
         String content = '';
