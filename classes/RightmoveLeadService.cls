@@ -9,12 +9,12 @@ global class RightmoveLeadService {
     /*
     * Constructor
     */
-	public RightmoveLeadService() {}
+    public RightmoveLeadService() {}
 
     @future(callout=true)
 	global static void getRightMoveLeads(){
 
-		String result = '';
+	String result = '';
         String content = '';
         /*
         * Create Rightmove JSON Request with RightmoveRequest Wrapper class
@@ -28,8 +28,7 @@ global class RightmoveLeadService {
 
         RightmoveRequest.Export_period export_period = new RightmoveRequest.Export_period();
         Date today = Date.today();
-        //Time morning = Time.newInstance(0,0,0,0);
-        //Time evening = Time.newInstance(23,59,59,59);
+        
         String starttime = String.valueOf(today.day())
                             + '-' 
                             + String.valueOf(today.month())
@@ -82,7 +81,7 @@ global class RightmoveLeadService {
             result = res.getBody();
             System.debug('RESPONSE IS >>> ' + result);
         } catch(System.CalloutException ex) {
-            Reach.Utils.CreateSystemException(ex);
+            System.debug('CALLOUT EXCEPTION >>> ' + ex);
             System.debug(res.toString());
         }
 
@@ -94,7 +93,7 @@ global class RightmoveLeadService {
         try{
             createLeads(responseObj.branch);
         }catch(Exception ex){
-            Reach.Utils.CreateSystemException(ex);
+            System.debug('COULD NOT CREATE LEADS >>> ' + ex);
         }
 	}
 
@@ -117,7 +116,6 @@ global class RightmoveLeadService {
                 }else{
                     Lead l = new Lead();
                     l.leadsource = 'Direct mail';
-                    l.lead_sub_source__c = 'RightMove';
                     l.firstname = em.User.User_contact_details.first_name;
                     l.lastname = em.User.User_contact_details.last_name;
                     l.salutation = em.User.User_contact_details.title;
@@ -128,15 +126,6 @@ global class RightmoveLeadService {
                     l.country = em.User.User_contact_details.country;
                     l.description = String.valueOf(em.User.User_information.comments);
                     l.to_address__c = em.to_address;
-                    //get the picklist values from Lead.Site__c and map to the To Email Address
-                    List<Schema.PicklistEntry> pick_list_values = Lead.Site_Name__c.getDescribe().getPickListValues();
-                    for(Schema.PicklistEntry pe : pick_list_values) {
-                      if(em.to_address.contains(pe.getValue().toLowerCase()))
-                        {
-                            l.Site_Name__c = pe.getValue();
-                            break;
-                        }
-                    }
                     //add the lead to the list
                     leads.add(l);  
                 }
@@ -145,6 +134,4 @@ global class RightmoveLeadService {
         
         insert leads;
 	}
-
-
 }
