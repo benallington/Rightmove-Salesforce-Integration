@@ -60,7 +60,7 @@ global class RightmoveLeadService {
         */
         HttpRequest req = new HttpRequest();
 
-        req.setClientCertificateName('cloudreach');
+        req.setClientCertificateName('putyourcertificatenamehere');
         req.setEndpoint('https://adfapi.rightmove.co.uk/v1/property/getbrandemails');
         req.setHeader('Content-Type',  'application/json; charset=utf-8');
         req.setBody(content);
